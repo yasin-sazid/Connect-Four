@@ -1,58 +1,35 @@
+# Connect Four — JavaFX Game with a Minimax Opponent
 
-# Connect Four
+A desktop implementation of Connect Four combining an interactive JavaFX board with an adversarial search opponent. Developed as an academic group project, it demonstrates how game rules, heuristic evaluation, and a graphical interface work together in a playable AI application.
 
-A repository for implementing **"Connect Four"** game as a group project for academic purpose.
+## Gameplay
 
-**Developers:**
+- Play against the computer on a six-row, seven-column board.
+- Choose a disc color and follow the turn indicator.
+- Drop discs into available columns and watch the board update.
+- Receive win and draw feedback, with in-application help and project information.
 
-   [Yasin Sazid](https://github.com/bsse1006) (BSSE 1006)
-		
-   [Atkia Akila Karim](https://github.com/atkia) (BSSE 1015)
-		
-   [Abdullah-Al-Jahid](https://github.com/Jahid1999) (BSSE 1030)
+## AI design
 
+The opponent searches up to **five plies** using minimax with **alpha–beta pruning**. Legal moves are generated from columns with available cells. Terminal states are scored with depth-sensitive utilities, while nonterminal positions use a board evaluation over potential four-disc winning patterns.
 
-**Technology Used:** Java, JavaFX
+Immediate tactical checks identify opportunities to win or block the human player's next winning move. The evaluation favors unopposed patterns and combines their scores into an estimate of the position's value.
 
-**Features:**
+## Architecture
 
-1.Connect 4 board game
+| Component | Responsibility |
+| --- | --- |
+| `src/sample/Main.java` | Board state, JavaFX controls, disc placement, and game lifecycle |
+| `src/miniMaxPackage/Minimax.java` | Move generation, search, pruning, and tactical checks |
+| `src/miniMaxPackage/EvaluationFunction.java` | Heuristic board scoring |
+| `src/images/` | Game imagery |
 
-2.Choosing disc colour
+## Launch
 
-3.Turn indicator
+Open the project in a Java IDE with a JDK and JavaFX configured. Mark `src/` as the source root, retain its image resources on the runtime classpath, and run `sample.Main`. For a modular JavaFX installation, include the JavaFX controls and FXML modules in the launch configuration.
 
-4.Help button for gameplay details
+[The project report](AI_Connect_4_Report_1006_1015_1030.pdf) accompanies the implementation.
 
-**Game Mechanics:**
+## Contributors
 
-1.Base algorithm used for AI: Minimax
-
-2.Alpha-Beta Pruning is used to minimise the game tree.
-
-3.Heuristic Method:
-
-4.The number of discs a player has in a winning pattern is a heuristic to estimate his chances of winning by completing that particular pattern (given that     there is no opposing disc in that particular pattern).
-
-**Evaluation Function:**
-
-At a particular state, for every winning pattern, we count the number of discs for AI and Human.
-
-If, there is no opposing discs in a pattern,
-For AI, score = pow(count, count)
-For Human, score = - pow(count, count)
-
-Then all the scores for every winning pattern are summed to get the final evaluation for that particular state.
-
-Cutting off search is done at game tree depth = 5
-
-**Additional Logic:**
-
-1.In cases where Human can win with a single move, AI will block that move without making the game tree.
-
-2.In cases where AI can win with a single move, AI will make that move without making the game tree.
-
-3.Utility value for winning is inversely proportional to depth of the winning node in the game tree.
-
-4.The number of discs a player has in a winning pattern is a heuristic to estimate his chances of winning by completing that particular pattern (given that     there is no opposing disc in that particular pattern).
-
+Yasin Sazid (BSSE 1006), Atkia Akila Karim (BSSE 1015), and Abdullah-Al-Jahid (BSSE 1030).
